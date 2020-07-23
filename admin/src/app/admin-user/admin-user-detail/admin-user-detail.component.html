@@ -1,0 +1,160 @@
+<form [formGroup]="adminUserDetailForm" style="padding-top: 20px">
+  <div class="row">
+    <div class="col-4 floating-label">
+      <select id="department" class="floating-select" onclick="this.setAttribute('value', this.value);"
+              formControlName="department">
+        <option value></option>
+        <option *ngFor="let item of dataForDropdown" id="{{item.name}}" value="{{item.name}}">
+          {{item.description}}
+        </option>
+      </select>
+      <span class="highlight"></span>
+      <label class="astric-label">
+        Department
+        <i class="fa fa-asterisk text-danger astric-red"></i>
+      </label>
+      <div class="text-danger"
+           *ngIf="(adminUserDetailForm.controls.department?.touched||adminUserDetailForm.controls.department?.dirty )&& !adminUserDetailForm.controls.department?.valid">
+        <span *ngIf="this.adminUserDetailForm.controls.department?.errors?.required">This field is required.</span>
+      </div>
+    </div>
+    <div class="col-4 floating-label">
+      <select id="role" class="floating-select" onclick="this.setAttribute('value', this.value);"
+              formControlName="role">
+        <option value></option>
+        <option *ngFor="let item of userRoleForDropdown" id="{{item.name}}" value="{{item.name}}">
+          {{item.description}}
+        </option>
+      </select>
+      <span class="highlight"></span>
+      <label class="astric-label">
+        Role
+        <i class="fa fa-asterisk text-danger astric-red"></i>
+      </label>
+      <div class="text-danger"
+           *ngIf="(adminUserDetailForm.controls.role?.touched||adminUserDetailForm.controls.role?.dirty )&& !adminUserDetailForm.controls.role?.valid">
+        <span *ngIf="this.adminUserDetailForm.controls.role.errors?.required">This field is required.</span>
+      </div>
+    </div>
+    <div class="col-12">
+      <!--<app-permission *ngIf="dataList.length > 0" [dataList]="dataList" [selectedList]="selectedList">-->
+      <!--</app-permission>-->
+    </div>
+    <div *ngIf="isCreate" class="col-8"></div>
+    <!-- <div *ngIf="isManage"> -->
+    <div *ngIf="isManage" class="col-md-4 float-right">
+      <div class="floating-label">
+        <input type="text" name="displayName" id="displayName" formControlName="displayName" class="floating-input"
+               placeholder aria-describedby="basic-addon2">
+        <span class="highlight"></span>
+        <label class="float-right">Display Name</label>
+      </div>
+      <div class="text-danger" *ngIf="(adminUserDetailForm.controls.displayName?.touched||
+              adminUserDetailForm.controls.displayName?.dirty )&&
+              !adminUserDetailForm.controls.displayName?.valid">
+        <span *ngIf="this.adminUserDetailForm.controls.displayName.errors?.required">This field is required.</span>
+        <span *ngIf="this.adminUserDetailForm.controls.displayName.errors?.maxlength">
+          Maximum Characters Allowed is 100</span>
+      </div>
+    </div>
+    <div *ngIf="isManage" class="col-md-4 float-right">
+      <div class="floating-label">
+        <input type="text" name="username" id="username" formControlName="username" class="floating-input" placeholder
+               aria-describedby="basic-addon2">
+        <span class="highlight"></span>
+        <label class="float-right">Username</label>
+      </div>
+      <div class="text-danger" *ngIf="(adminUserDetailForm.controls.username?.touched||
+            adminUserDetailForm.controls.username?.dirty )&&
+             !adminUserDetailForm.controls.username?.valid">
+        <span *ngIf="this.adminUserDetailForm.controls.username.errors?.required">This field is required.</span>
+        <span *ngIf="this.adminUserDetailForm.controls.username.errors?.maxlength">
+          Maximum Characters Allowed is 100</span>
+      </div>
+    </div>
+    <div *ngIf="isManage" class="col-md-4 float-right">
+      <div class="floating-label">
+        <input type="email" name="email" id="email" formControlName="email" class="floating-input" placeholder
+               aria-describedby="basic-addon2">
+        <span class="highlight"></span>
+        <label class="float-right">Email</label>
+      </div>
+      <div class="text-danger" *ngIf="(adminUserDetailForm.controls.email?.touched||
+            adminUserDetailForm.controls.email?.dirty )&&
+             !adminUserDetailForm.controls.email?.valid">
+        <span *ngIf="this.adminUserDetailForm.controls.email.errors?.required">This field is required.</span>
+        <span
+          *ngIf="this.adminUserDetailForm.controls.email.errors?.email || this.adminUserDetailForm.controls.email.errors?.pattern">
+          Invalid Email</span>
+      </div>
+    </div>
+    <div *ngIf="isManage" class="col-4 floating-label">
+      <select id="status" class="floating-select" onclick="this.setAttribute('value', this.value);"
+              formControlName="status">
+        <option value></option>
+        <option *ngFor="let status of dataToSelect?.statusForAdminUser" id="{{status.id}}" value="{{status.id}}">
+          {{status.name}}
+        </option>
+      </select>
+      <span class="highlight"></span>
+      <label class="astric-label">
+        Status
+        <i class="fa fa-asterisk text-danger astric-red"></i>
+      </label>
+      <div class="text-danger"
+           *ngIf="(adminUserDetailForm.controls.enabled?.touched||adminUserDetailForm.controls.enabled?.dirty )&& !adminUserDetailForm.controls.enabled?.valid">
+        <span *ngIf="this.adminUserDetailForm.controls.enabled.errors?.required">Invalid IC Type</span>
+      </div>
+    </div>
+    <div style="margin-top:-20px;">
+      <app-add-modified-reason [modificationTypeId]="modificationTypeId"
+                               *ngIf="isupdateButtonClicked && isManage"
+                               [addModfiedReasonForm]="adminUserDetailForm">
+      </app-add-modified-reason>
+    </div>
+    <div class="col-4" *ngIf="isCreate" style="position: absolute" style="position: absolute;
+         top: 175px;
+         z-index: 100;
+         left: 10px;
+         width: 300px;">
+      <div class="floating-label">
+        <input type="text" [(ngModel)]="queryString" name="query" class="floating-input" placeholder
+               aria-describedby="basic-addon2" formControlName="query" (keyup)="loadUsers()"
+               style="border-bottom: none !important;">
+        <!--<span class="highlight"></span>-->
+        <!--<label class="float-right">Load Users </label>-->
+      </div>
+    </div>
+    <div class="col-8"></div>
+    <!--<div class="col-8"></div>-->
+    <!--<app-add-modified-reason *ngIf="isManage && isupdateButtonClicked" [modificationTypeId]="modificationTypeId"-->
+    <!--[addModfiedReasonForm]="adminUserDetailForm.controls.modifyReason"></app-add-modified-reason>-->
+
+    <!-- </div> -->
+    <!-- <dual-list [sort]="keepSorted" [source]="source" [key]="key" [display]="display" [filter]="filter"
+		[(destination)]="confirmed" height="265px" [format]="format" [disabled]="disabled"></dual-list> -->
+    <!--<div class="col-2"></div>-->
+    <div class="col-8">
+      <!--<dual-list class="col-12" *ngIf="isCreate" [source]="source" [key]="username" [(display)]="username"-->
+                 <!--[filter]="true" [sort]="true" height="100px"-->
+                 <!--[(destination)]="confirmed" height="265px"-->
+                 <!--[format]="format">-->
+      <!--</dual-list>-->
+      <dual-list *ngIf="isCreate" [sort]="keepSorted" [source]="source" [key]="key" [display]="display" [filter]="true"
+                 [(destination)]="confirmed" height="265px" [format]="format" [disabled]="false"></dual-list>
+      <!--<ngx-dual-listbox [source]="source" [(destination)]="confirmed">-->
+      <!--</ngx-dual-listbox>-->
+
+    </div>
+    <div class="col-4"></div>
+    <div class="col-8"></div>
+    <div class="col-2" (click)="submit()">
+      <button class="btn btn-info">
+        {{(isManage && isupdateButtonClicked)||isCreate? "Submit":"Update" }}
+      </button>
+    </div>
+    <div class="col-2" (click)="cancel()" *ngIf="(isManage && isupdateButtonClicked)||isCreate">
+      <button class="btn">Cancel</button>
+    </div>
+  </div>
+</form>

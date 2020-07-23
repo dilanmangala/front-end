@@ -1,0 +1,190 @@
+<form [formGroup]="myTaskHistoryForm">
+  <div class="row" style="margin-bottom: 30px;">
+    <div class="col-lg-6">
+      <div>Status</div>
+      <br>
+      <angular2-multiselect [data]="dropdownList" [(ngModel)]="selectedItems" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"
+        (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)"
+        formControlName="status" style="width:100%">
+        <c-item style="float:left">
+          <ng-template let-item="item">
+            <label style="color: #333;min-width: 150px;">{{item.itemName}}</label>
+          </ng-template>
+        </c-item>
+        <c-badge>
+          <ng-template let-item="item">
+            <label style="font-size: 16px; margin: 0px;">{{item.itemName}}</label>
+          </ng-template>
+        </c-badge>
+      </angular2-multiselect>
+    </div>
+    <div class="col-lg-6">
+      <div>Task Type</div>
+      <br>
+      <angular2-multiselect [data]="dropdownList1" [(ngModel)]="selectedItems1" [settings]="dropdownSettings1"
+        (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)"
+        (onDeSelectAll)="onDeSelectAll($event)" formControlName="process" style="width:100%">
+        <c-item style="float:left">
+          <ng-template let-item="item">
+            <label style="color: #333;min-width: 150px;">{{item.itemName}}</label>
+          </ng-template>
+        </c-item>
+        <c-badge>
+          <ng-template let-item="item">
+            <label style="font-size: 16px; margin: 0px;">{{item.itemName}}</label>
+          </ng-template>
+        </c-badge>
+      </angular2-multiselect>
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 25px;">
+    <div class="col-4">Added Date</div>
+    <div class="col-4" *ngIf="isCompletedSelected">
+      Completed Date
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2 floating-label text">
+      <input type="text" placeholder="" id="addedDateFrom" formControlName="addedDateFrom" ngbDatepicker #i="ngbDatepicker"
+        class="floating-input" [defaultValue]="minAddedDate" [minDate]="minAddedDate" [maxDate]="maxAddedDate" readonly>
+      <i (click)="i.toggle()" class="fa fa-calendar calender-icon"></i>
+      <span class="highlight"></span>
+      <label class="astric-label text">From</label>
+    </div>
+    <div class="col-2 floating-label text">
+      <input type="text" placeholder="" id="addedDateTo" formControlName="addedDateTo" ngbDatepicker #j="ngbDatepicker"
+        class="floating-input" [minDate]="minAddedDate" [maxDate]="maxAddedDate" readonly>
+      <i (click)="j.toggle()" class="fa fa-calendar calender-icon"></i>
+      <span class="highlight"></span>
+      <label class="astric-label text">To</label>
+    </div>
+    <div class="col-2 floating-label text" *ngIf="isCompletedSelected">
+      <input type="text" placeholder="" id="completedDateFrom" formControlName="completedDateFrom" ngbDatepicker #k="ngbDatepicker"
+        class="floating-input" [minDate]="minCompletedDate" [maxDate]="maxCompletedDate" readonly>
+      <i (click)="k.toggle()" class="fa fa-calendar calender-icon"></i>
+      <span class="highlight"></span>
+      <label class="astric-label text">From</label>
+    </div>
+    <div class="col-2 floating-label text" *ngIf="isCompletedSelected">
+      <input type="text" placeholder="" id="completedDateTo" formControlName="completedDateTo" ngbDatepicker #l="ngbDatepicker"
+        class="floating-input" [minDate]="minCompletedDate" [maxDate]="maxCompletedDate" readonly>
+      <i (click)="l.toggle()" class="fa fa-calendar calender-icon"></i>
+      <span class="highlight"></span>
+      <label class="astric-label text">To</label>
+    </div>
+    <div class="col-1">
+      <button type="button" class="btn btn-info" (click)="filter()">
+        Filter
+      </button>
+    </div>
+    <div class="col-2 pull-left" style="padding-right:3px;">
+      <button (click)="clear()" class="btn">
+        Clear Filter
+      </button>
+    </div>
+    <div class="col-2">
+      <div class="btn-group" data-toggle="buttons">
+        <button class="btn btn-default" [ngClass]="{'btn-primary': isPDF}" (click)="togleClick(1)">
+          PDF
+        </button>
+        <button class="btn btn-default" [ngClass]="{' btn-primary': !isPDF}" (click)="togleClick(2)">
+          Excel
+        </button>
+      </div>
+    </div>
+    <div class="col-1 text">
+      <button type="button" class="btn btn-primary" (click)="download()">
+        <i class="fa fa-download">Download</i>
+      </button>
+    </div>
+  </div>
+  <div class="text-danger" *ngIf="showErrorMsg">
+    Please Select Filteration Criteria
+  </div>
+  <div>
+    <table class="table datatable blueTable">
+      <thead class="datatable-header">
+        <tr>
+          <th>Task Id</th>
+          <th>Description</th>
+          <th>Added Date</th>
+          <th>Completed Date</th>
+          <th>Status</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody class="datatable-body">
+        <tr *ngFor="let row of pagedItems" width="100%">
+          <td width="10%">{{row.taskId}}</td>
+          <td width="15%">{{row.process_name}}</td>
+          <td width="17%">
+            {{(row["addedDate"].split("T")[0]+" " + row["addedDate"].split("T")[1].split(".")[0] )}}
+          </td>
+          <td width="18%">
+            {{(row["status"]==='COMPLETED'||row["status"]==='Completed') ?
+            (row["completedDate"].split("T")[0]+" " + row["completedDate"].split("T")[1].split(".")[0] ):'' }}
+          </td>
+          <td width="10%">
+            {{row.status}}
+          </td>
+          <td width="10%" *ngIf="row.detailType==='Internal'">
+            <button type="button" (click)="viewDetailClicked(row)" class="btn btn-sm btn-primary">
+              View Detail
+            </button>
+          </td>
+          <td width="10%" *ngIf="row.detailType==='External' &&( row.status==='COMPLETED' || row.status==='Completed')">
+            <button type="button" (click)="DownloadClicked(row)" class="btn btn-sm btn-primary">
+              Download
+            </button>
+          </td>
+          <td width="10%" *ngIf="row.detailType==='External' &&  ( row.status!='COMPLETED' && row.status!='Completed')">
+          </td>
+
+          <td width="10%">
+            <div *ngIf="row.status==='FAILED'">{{
+              row.description}}</div>
+            <div *ngIf="row.status==='PROCESSING'">
+              <ngb-progressbar *ngIf="(((row.successCount)*100)/(row.recordCount))>0 && (((row.successCount)*100)/(row.recordCount))<100"
+                type="warning" [striped]="true" [animated]="true" [value]="(row.successCount*100/row.recordCount)">
+                <i>
+                  {{(((row.successCount)*100)/(row.recordCount)) |number: '2.0-0' }}
+                </i>
+              </ngb-progressbar>
+              <ngb-progressbar *ngIf="(((row.successCount)*100)/(row.recordCount))===0" [striped]="true" type="danger"
+                [animated]="true" [value]="100">
+                <i>
+                  {{(((row.successCount)*100)/(row.recordCount)) |number: '1.0-0' }}
+                </i>
+              </ngb-progressbar>
+              <ngb-progressbar *ngIf="(((row.successCount)*100)/(row.recordCount))===100" type="success" [striped]="true"
+                [animated]="true" [value]="(row.successCount*100/row.recordCount)">
+                <i>
+                  {{(((row.successCount)*100)/(row.recordCount)) |number: '2.0-0' }}
+                </i>
+              </ngb-progressbar>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ul *ngIf="pager.pages && pager.pages.length" class="pagination primary">
+      <li [ngClass]="{disabled:pager.currentPage === 1}">
+        <a (click)="setPage(1)">First</a>
+      </li>
+      <li [ngClass]="{disabled:pager.currentPage === 1}">
+        <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+      </li>
+      <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page,disabled:pager.currentPage === page}">
+        <a (click)="setPage(page)">{{page}}</a>
+      </li>
+      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+        <a (click)="setPage(pager.currentPage + 1)">Next</a>
+      </li>
+      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+        <a (click)="setPage(pager.totalPages)">Last</a>
+      </li>
+    </ul>
+    <div></div>
+  </div>
+</form>

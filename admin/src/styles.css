@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~perfect-scrollbar/css/perfect-scrollbar.css';
+@import "~nouislider/distribute/nouislider.min.css";
+.ps .ps__scrollbar-y-rail {
+    left: 3px;
+    right: auto;
+}
+.treeview-item{
+  margin-right: 35px !important;
+}
+
+.treeview-container{
+  border: #3d4554 1px !important;
+}

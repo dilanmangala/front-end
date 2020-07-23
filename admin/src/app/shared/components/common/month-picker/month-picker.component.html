@@ -1,0 +1,33 @@
+<div class="input-group fdms-mp-input  floating-label">
+  <!-- <span class="float-left"> -->
+  <input type="text" readOnly  value="{{model |date: 'yyyy-MMMM'}}" class="floating-input"  placeholder="{{config?.placeHolder}}"/>
+  <!-- </span> -->
+   <!-- <span > -->
+    <i  (click)="onCalendarIconClick()" class="fa fa-calendar calender-icon"></i>
+  <!-- </span> -->
+  <span class="highlight"></span>
+  <label class="astric-label text">Year /Month
+    <i class="fa fa-asterisk text-danger astric-red"></i>
+  </label>
+  <div class="fdms-month-picker" *ngIf="monthPicker.state=='open'">
+    <div class="col-md-12 d-title">{{monthPicker.selectedMonth}}, {{monthPicker.selectedYear}}</div>
+    <div class="col-md-12 d-nav">
+      <div class="col-md-3 float-left">
+        <span (click)="onPrevYearSelection()">&lt;</span>
+      </div>
+      <div class="col-md-6 float-left">
+        <span (click)="switchToYearMode()">{{monthPicker.displayYear}}</span>
+      </div>
+      <div class="col-md-3 float-left">
+        <span (click)="onNextYearSelection()" >&gt;</span>
+      </div>
+    </div>
+    <br>
+    <div class="row d-selection-wraper">
+      <div class="col-md-3  d-selection-item" *ngFor="let item of monthPicker.selectionItems">
+        <span (click)="onselectionItemClick(item)">{{item.text}}</span>
+      </div>
+    </div>
+
+  </div>
+</div>

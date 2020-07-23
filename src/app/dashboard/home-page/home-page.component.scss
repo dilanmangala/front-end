@@ -1,0 +1,202 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.skew {
+  position: relative;
+  margin: -88px 83px auto;
+  height: 95px;
+  width: 115px;
+  right: -45px;
+
+}
+// .card{
+//   max-width: 197px;
+// }
+.skew1 {
+  background: #24d2b5;
+}
+.img-wrapper{
+  // margin-top:24px;
+  // margin-left:23px;
+}
+.skew2 {
+  background:  #b45fff;
+}
+
+.skew3 {
+  background: #20aee3;
+}
+
+.skew4 {
+  background: #6772e5;
+
+}
+.skew5 {
+  background: #e8a42e;
+
+}
+
+.skew1:before .skew1:after {
+  border-bottom-color: #24d2b5;
+
+}
+.skew1:before{
+  color: #24d2b5;
+}
+
+.skew2:before .skew2:after {
+  border-bottom-color:  #b45fff;
+
+}
+.skew2:before{
+  color:  #b45fff;
+}
+
+.skew3:before .skew3:after {
+  border-bottom-color: #20aee3;
+
+}
+.skew3:before {
+   color: #20aee3;
+}
+
+.skew4:before .skew4:after {
+  border-bottom-color: #6772e5;
+
+}
+.skew4:before{
+    color: #6772e5;
+}
+
+.skew5:before .skew5:after {
+  border-bottom-color: #e8a42e;
+
+}
+.skew5:before{
+    color: #e8a42e;
+}
+
+.skew:after,
+.skew:before {
+  height: 0;
+  width: 0;
+  content: "";
+  display: block;
+  position: relative;
+}
+
+.skew:before {
+  border-bottom: 95px solid;
+  border-left: 43px solid transparent;
+  left: -43px;
+}
+
+.skew:after {
+  border-bottom: 50px solid; // border-right: 12px solid transparent;
+  left: 100px;
+  top: -50px;
+}
+
+.skew6 {
+  background: #ff6d00;
+
+}
+
+.skew6:before .skew6:after {
+  border-bottom-color: #ff6d00;
+
+}
+.skew6:before{
+  color: #ff6d00;
+}
+
+.ticker-p{
+  font-size: 20px;
+  color:white;
+  text-decoration-color: white;
+}
+
+.widget-p {
+  top: -127px;
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 700;
+  margin-top: -80px !important;
+  text-align: right;
+  margin-right:15px;
+
+  top: -64px;
+  margin-top: -146px;
+  -webkit-text-decoration-color: white;
+  text-decoration-color: white;
+  color: white;
+}
+img{
+width:60px;
+height:60px;
+margin-top:20px;
+margin-bottom:8px;
+margin-left:23px;
+
+// margin:25px 0 0 35px;
+}
+
+
+.card:hover {
+  box-shadow: 0px 5px 20px rgba(0.08, 0.08, 0.08, 0.25) !important;
+  transition: 0.5s;
+}
+
+.card{
+  transition: 0.5s;
+  // max-width:381px;
+}
+.ticker1 {
+  background: #24d2b5;
+}
+
+.ticker2 {
+  background:  #b45fff;
+}
+
+.ticker3 {
+  background: #20aee3;
+}
+
+.ticker4 {
+  background: #6772e5;
+
+}
+.pre-cycle{
+  font-weight:600;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

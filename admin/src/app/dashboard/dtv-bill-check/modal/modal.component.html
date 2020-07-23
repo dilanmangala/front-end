@@ -1,0 +1,16 @@
+
+  <ng-template  #content let-c="close"  let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title"> <i class="fa fa-error"></i>Invalid File</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <p id="exportDiv text">{{errorLog}}</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-info text" (click)="downloadButtonClick()"><i class="fa fa-download" ></i>Download</button>
+        <button class="btn text" (click)="copy()"> <i class="fa fa-copy"></i>Copy</button>
+    </div>
+  </ng-template>

@@ -1,0 +1,37 @@
+<form [formGroup]="departmentDetailForm">
+  <div class="row">
+    <div class="col-4 floating-label" *ngIf="isCreateDepartment">
+      <input type="text" placeholder=" " id="departmentName" class="floating-input" formControlName="departmentName">
+      <span class="highlight"></span>
+      <label class="astric-label">Department Name<i class="fa fa-asterisk text-danger astric-red"></i></label>
+      <div class="text-danger" *ngIf="(departmentDetailForm.controls?.departmentName?.touched ||
+    departmentDetailForm.controls?.departmentName?.dirty )&&
+     !departmentDetailForm.controls?.departmentName?.valid">
+              <span *ngIf="departmentDetailForm.controls?.departmentName?.errors.required">
+        This field is required.</span>
+        <span *ngIf="departmentDetailForm.controls?.departmentName?.errors.minlength">
+        Must be at Least 1 Characters</span>
+        <span *ngIf="departmentDetailForm.controls?.departmentName?.errors.maxlength">
+        Maximum Characters Allowed is 100</span>
+      </div>
+    </div>
+    <div class="col-12">
+    <app-permission [dataList]="this.dataList" [selectedList]="this.selectedList">
+    </app-permission></div>
+    <div style="margin-top:20px;">
+      <app-add-modified-reason [modificationTypeId]="modificationTypeId"
+                               *ngIf="isUpdatButtonClicked && isUpdateDepartment"
+                               [addModfiedReasonForm]="departmentDetailForm">
+      </app-add-modified-reason>
+    </div>
+    <div class="col-8"></div>
+        <div class="col-2">
+          <button class="btn-info btn" (click)="submit()"> {{isCreateDepartment || (isUpdateDepartment&&
+            isUpdatButtonClicked)? "Submit" :"Update"}}
+          </button>
+        </div>
+        <div class="col-2" *ngIf="isCreateDepartment || (isUpdateDepartment && isUpdatButtonClicked)">
+          <button (click)="cancel()" class="btn">Cancel</button>
+        </div>
+      </div>
+</form>

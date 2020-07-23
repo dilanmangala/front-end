@@ -1,0 +1,16 @@
+<div class="card">
+  <div class="card-body">
+
+      <app-stepper  [steps]="steps" (stepperClick)="onSelectStep($event)" [activeStep]="activeStep" *ngIf="isDynamicFormDataTable"></app-stepper>
+  <app-my-task-history-v1 (depName)="getDepName($event)"
+   *ngIf="isMyTaskHistory" (nextClick)="onClickNext($event)" [stepId]="1" (resetClick)="onClickReset($event)" [taskForm]="taskForm"
+        (depName)="getDepName($event)"  ></app-my-task-history-v1>
+        <app-dynamic-form [formValue]=[formValue]  *ngIf="!isMyTaskHistory" [dynamicFormData]=[dynamicFormData] [dropdownData]=[dropdownData]></app-dynamic-form>
+
+      <app-view-summaryv1 [taskDetail]="taskDetail" [allItemsfromDashboard]=[allItemsfromDashboard]  *ngIf="isViewSummary && allItemsfromDashboard" [stepId]="2"></app-view-summaryv1>
+      <!-- <app-stepper [steps]="steps" (stepperClick)="stepperClick($event)" ></app-stepper> -->
+      <!-- <app-my-task-history-v1 (taskViewDetailValueChange)="taskViewDetail($event)" *ngIf="isMyTaskHistory"></app-my-task-history-v1> -->
+      <!-- <app-dynamic-form-datatable *ngIf="isDynamicFormDataTable"></app-dynamic-form-datatable> -->
+    <!-- <app-view-summaryv1 [taskDetail]="taskDetail"  *ngIf="isViewSummary"></app-view-summaryv1> -->
+   </div>
+</div>

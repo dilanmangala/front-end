@@ -1,0 +1,34 @@
+<table class="table datatable blueTable">
+  <thead class="datatable-header">
+    <tr>
+      <th *ngFor="let column of taskSummaryDataTable?.columns">
+        {{column.header}}
+      </th>
+    </tr>
+  </thead>
+  <tbody class="datatable-body">
+    <tr *ngFor="let row of pagedItems ">
+      <td *ngFor="let column of taskSummaryDataTable?.columns" width="{{column.width}}">
+        {{row[column.property]}}
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ul *ngIf="pager.pages && pager.pages.length" class="pagination primary">
+  <li  [ngClass]="{disabled:pager.currentPage === 1}">
+    <a (click)="setPage(1)">First</a>
+  </li>
+  <li [ngClass]="{disabled:pager.currentPage === 1}">
+    <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+  </li>
+  <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page,disabled:pager.currentPage === page}">
+    <a (click)="setPage(page)">{{page}}</a>
+  </li>
+  <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+    <a (click)="setPage(pager.currentPage + 1)">Next</a>
+  </li>
+  <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+    <a (click)="setPage(pager.totalPages)">Last</a>
+  </li>
+</ul>

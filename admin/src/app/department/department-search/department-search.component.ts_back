@@ -1,0 +1,83 @@
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { PubSubEvent } from "../../../environments/pub-sub-event";
+import { PubSubService } from "./../../shared/services/pub-sub/pub-sub.service";
+import { DepartmentService } from "./../../shared/services/department.service";
+import { ToastsManager } from "ng2-toastr";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from "@angular/forms";
+@Component({
+  selector: "app-department-search",
+  templateUrl: "./department-search.component.html",
+  styleUrls: ["./department-search.component.scss"]
+})
+export class DepartmentSearchComponent implements OnInit {
+  //Stepper update
+  @Output() nextClick = new EventEmitter();
+  @Input() stepId: number;
+  isManageDepartment: boolean;
+  iscreateDepartment: boolean;
+  departmentNameForm: FormGroup;
+  dataForDropdown: any[] = [];
+  constructor(
+    private fb: FormBuilder,
+    private pubsub: PubSubService,
+    private departmentService: DepartmentService,
+    private toastr: ToastsManager
+  ) { }
+  ngOnInit() {
+    this.isManageDepartment =
+      location.hash === "#/department/manage-department";
+    this.iscreateDepartment = location.hash === "#/department/add-department";
+    if (this.isManageDepartment) {
+      this.departmentService.GetDepartment().subscribe(data => {
+        this.dataForDropdown = data;
+      });
+    }
+    this.departmentNameForm = this.fb.group({
+      departmentName: new FormControl("", [Validators.required])
+    });
+    let departmentChangedName = '';
+    // this.departmentNameForm.controls.departmentName.valueChanges.subscribe(data => {
+    //   if (departmentChangedName !== data) {
+    //     departmentChangedName = data;
+    //     this.pubsub.$pub(
+    //       PubSubEvent.DEPARTMENT_SEARCH_DEPARTMENT_NAME,
+    //       this.departmentNameForm.controls.departmentName.value
+    //     );
+    // }
+    // });
+  }
+  resetButtonClick() {
+    this.pubsub.$pub(PubSubEvent.DEPARTMENT_SEARCH_RESET_BUTTON_CLICKED, true);
+    this.departmentNameForm.reset();
+    this.pubsub.$pub(PubSubEvent.Clear_Checkbox_Table_Form,"Cancel_Button_Click");
+    this.pubsub.$pub(PubSubEvent.STEPS_RESET, 2);
+
+  }
+
+  searchButtonClick() {
+    this.departmentService
+      .GetPermissionListByDepartmentId(
+        this.departmentNameForm.controls.departmentName.value
+      )
+      .subscribe(
+        data => {
+          console.log('search button click : stepId : ' + this.stepId + ', department:' + this.departmentNameForm.controls.departmentName.value);
+          this.nextClick.emit({'stepId': this.stepId, 'department': this.departmentNameForm.controls.departmentName.value});
+          // this.pubsub.$pub(PubSubEvent.DEPARTMENT_SEARCH_PERMISSION, data);
+          // this.pubsub.$pub(
+          //   PubSubEvent.DEPARTMENT_SEARCH_DEPARTMENT_NAME,
+          //   this.departmentNameForm.controls.departmentName.value
+          // );
+          // this.pubsub.$pub(PubSubEvent.STEPS, 2 );
+        },
+        err => {
+          this.toastr.error(err);
+        }
+      );
+  }
+}

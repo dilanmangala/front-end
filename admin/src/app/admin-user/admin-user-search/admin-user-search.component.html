@@ -1,0 +1,23 @@
+<form [formGroup]= "adminUserSearchForm" style="padding-bottom: 20px">
+  <div class="row">
+    <div class="col-2"></div>
+   <div class="col-4 float-right">
+      <div class="floating-label">
+        <input type="text" name="userName" id="userName" formControlName="userName"
+               class="floating-input"
+               placeholder="" aria-describedby="basic-addon2">
+        <span class="highlight"></span>
+        <label class="float-right">Username</label>
+      </div>
+      <div class="text-danger" *ngIf="(adminUserSearchForm.controls.userName.touched||
+            adminUserSearchForm.controls.userName.dirty ) &&
+             !adminUserSearchForm.controls.userName.valid">
+                            <span *ngIf="this.adminUserSearchForm.controls.userName.errors?.required">
+                Value is required.</span>
+      </div>
+    </div>
+  <div class="col-2"><button (click)="adminUserSearchButtonClick()" class="btn btn-info">Search</button></div>
+  <div class="col-2"><button class="btn" (click)="resetButtonClick()">Reset</button></div>
+    <div class="col-2"></div>
+  </div>
+  </form>

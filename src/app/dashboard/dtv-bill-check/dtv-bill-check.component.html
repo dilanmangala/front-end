@@ -1,0 +1,77 @@
+<form [formGroup]="dtvBillCheckForm">
+  <div class="card">
+    <div class="card-body">
+      <div class="row" style="padding-top:38px; padding-left:20px;">
+  <!--modal-->
+  <ng-template  #content let-c="close"  let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title"> <i class="fa fa-error"></i>Invalid File</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <p id="exportDiv text">{{errorLog}}</p>
+      </div>
+      <div class="modal-footer">
+          <button class="btn btn-info text" (click)="downloadButtonClick()"><i class="fa fa-download" ></i>Download</button>
+          <button class="btn text" (click)="copy()"> <i class="fa fa-copy"></i>Copy</button>
+      </div>
+    </ng-template>
+  <!--modal-->
+        <div class="col-4 floating-label text">
+          <input type="text" placeholder=" " id="taskName" class="floating-input" formControlName="taskName">
+          <span class="highlight"></span>
+          <label class="astric-label text">Task Name
+            <i class="fa fa-asterisk text-danger astric-red"></i>
+          </label>
+          <div class="text-danger" *ngIf="(dtvBillCheckForm.controls.taskName.touched||
+           dtvBillCheckForm.controls.taskName.dirty )&&
+         !dtvBillCheckForm.controls.taskName.valid">
+            <span *ngIf="dtvBillCheckForm.controls.taskName.errors.required">
+          Task Name is required</span>
+          <span *ngIf="dtvBillCheckForm.controls.taskName.errors.minlength">
+            Must be at Least {{dtvBillCheckForm.controls.taskName.errors.minlength.requiredLength}} Characters</span>
+          <span *ngIf="dtvBillCheckForm.controls.taskName.errors.maxlength">
+            Maximum Characters Allowed is {{dtvBillCheckForm.controls.taskName.errors.maxlength.requiredLength}}</span>
+          </div>
+        </div>
+        <div class="col-4">
+            <fdms-month-picker (modelChange)="modelChange($event)"></fdms-month-picker>
+          </div>
+        <div class="col-4 "></div>
+        <div class="col-4 ">
+          <span>
+            <label class="text astric-label-inline">Account Numbers  <i class="fa fa-asterisk text-danger astric-red"></i></label><br>
+            <label class="text">  {{ uploadedFileName}}</label>
+            <button type="button" (click)="file.click()" name="Upload" class="btn  btn-primary">Browse
+              <input type="file" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" #file
+                id="ic" (change)="handleFileInput($event)" class="upload-input" />
+            </button>
+              <div class="text-danger" *ngIf="(dtvBillCheckForm.controls.fileName.touched|| dtvBillCheckForm.controls.fileName.dirty) &&
+                     !dtvBillCheckForm.controls.fileName.valid">
+                    <span *ngIf="dtvBillCheckForm.controls.fileName?.errors.required">
+                     File Required</span>
+                  </div>
+                  <span class="text-danger" *ngIf="UploadError">{{UploadError}}</span>
+                 <br>
+                 <br>
+                  <p>
+                      <!-- <ngb-progressbar type="success" [value]="uploadStatus" [striped]="true" [animated]="true">
+                        <i>{{uploadStatus}}</i>
+                      </ngb-progressbar> -->
+                    </p>
+          </span>
+        </div>
+        <div class="col-8 "></div>
+        <div class="col-9"> </div>
+        <div class="col-2">
+          <button (click)="billCheckingProcessClick()" class="pull-right btn btn-info">Start Process</button>
+        </div>
+        <div class="col-1">
+          <button class="btn pull-right" onclick="location.href='#/dashboard/dashboard'">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

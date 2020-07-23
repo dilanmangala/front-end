@@ -1,0 +1,70 @@
+<form [formGroup]="userRoleDetailForm" style="padding-top: 10px">
+  <div class="row">
+    <div class="col-4 floating-label" *ngIf="!isManage">
+      <input type="text" placeholder=" " id="roleName" class="floating-input" formControlName="roleName">
+      <span class="highlight"></span>
+      <label class="astric-label">Role Name<i class="fa fa-asterisk text-danger astric-red"></i></label>
+      <div class="text-danger" *ngIf="(userRoleDetailForm.controls?.roleName?.touched||
+    userRoleDetailForm.controls?.roleName?.dirty )&&
+     !userRoleDetailForm.controls?.roleName?.valid">
+              <span *ngIf="userRoleDetailForm.controls.roleName.errors?.required">
+        This field is required.</span>
+        <span *ngIf="userRoleDetailForm.controls?.roleName?.errors.minlength">
+        Must be at Least 1 Characters</span>
+        <span *ngIf="userRoleDetailForm.controls?.roleName?.errors.maxlength">
+        Maximum Characters Allowed is 100</span>
+      </div>
+    </div>
+
+    <div class="col-4 floating-label" *ngIf="!isManage">
+      <select id="department" class="floating-select" onclick="setAttribute('value', this.value);" value=""
+              formControlName="department">
+        <option value=""></option>
+        <option *ngFor="let item of dataForDropdown" id="{{item.name}}" value="{{item.name}}">
+          {{item.description}}
+        </option>
+      </select>
+      <span class="highlight"></span>
+      <label class="astric-label">Department<i class="fa fa-asterisk text-danger astric-red"></i></label>
+      <div class="text-danger"
+           *ngIf="(userRoleDetailForm.controls?.department?.touched||userRoleDetailForm.controls?.department?.dirty)
+           && !userRoleDetailForm.controls?.department.valid">
+        <span *ngIf="userRoleDetailForm.controls?.department.errors?.required">This field is required.</span>
+      </div>
+    </div>
+    <app-add-modified-reason [modificationTypeId]="modificationTypeId"
+                             *ngIf="isupdateButtonClicked && isManage"
+                             [addModfiedReasonForm]="userRoleDetailForm.controls?.modifyReason">
+    </app-add-modified-reason>
+    <div class="col-12" style="margin-bottom: 40px;">
+      <app-permission *ngIf="dataList.length > 0" [dataList]="this.dataList" [selectedList]="this.selectedList">
+      </app-permission>
+    </div>
+    <!--<div class="col-4 floating-label">-->
+    <!--<select id="status" class="floating-select" onclick="this.setAttribute('value', this.value);" value=""-->
+    <!--formControlName="status">-->
+    <!--<option value=""></option>-->
+    <!--<option *ngFor="let status of dataToSelect?.statusForUserRole" id="{{status.id}}" value="{{status.id}}">-->
+    <!--{{status.name}}-->
+    <!--</option>-->
+    <!--</select>-->
+    <!--<span class="highlight"></span>-->
+    <!--<label class="astric-label">Status<i class="fa fa-asterisk text-danger astric-red"></i></label>-->
+    <!--<div class="text-danger"-->
+    <!--*ngIf="(userRoleDetailForm.controls?.status.touched||userRoleDetailForm.controls?.status.dirty )&& !userRoleDetailForm.controls?.status.valid">-->
+    <!--<span *ngIf="userRoleDetailForm.controls?.status.errors.required"> Invalid IC Type</span>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col-8"></div>-->
+    <div class="row" style="width: 100%">
+      <div class="col-8"></div>
+      <div class="col-2" (click)="register()">
+        <button class="btn btn-info">{{(isManage && isupdateButtonClicked)||isCreate? "Submit":"Update" }}</button>
+      </div>
+      <div class="col-2" (click)="cancel()" *ngIf="(isManage && isupdateButtonClicked)||isCreate">
+        <button class="btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+</form>
+

@@ -1,0 +1,10 @@
+<div class="card" *ngIf="doughnutChartData?.length>0">
+    <div class="card-body">
+          <div class="d-flex no-block">
+              <h3 class="card-title  align-self-center">Frequent Errors&nbsp;</h3>
+              <h6 class="card-title  align-self-center">(Last 6 Months)</h6>
+          </div>
+    <canvas baseChart height="424px"  [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)" [colors]="[{backgroundColor: ['#BA68C8', '#64B5F6', '#4DB6AC','#FFB74D','#A1887F','#F06292']}]">
+      </canvas>
+</div>
+</div>

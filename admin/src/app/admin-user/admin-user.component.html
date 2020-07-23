@@ -1,0 +1,14 @@
+<div class="card">
+  <div class="card-body">
+    <app-stepper *ngIf="isManage" [steps]="steps"
+                 (stepperClick)="onSelectStep($event)" [activeStep]="activeStep"></app-stepper>
+    <!--<app-admin-user-search *ngIf="isManage && !isSearchButtonClicked"></app-admin-user-search>-->
+    <app-admin-user-search (nextClick)="onClickNext($event)" (resetClick)="onClickReset($event)"
+                           (depName)="getDepName($event)" [stepId]="1" *ngIf="isManage && !isSearchButtonClicked">
+    </app-admin-user-search>
+    <app-admin-user-detail *ngIf="isCreate || (isManage && (activeStep == 2))"
+                           [incomingData]="data" [stepId]="2">
+
+    </app-admin-user-detail>
+</div>
+</div>

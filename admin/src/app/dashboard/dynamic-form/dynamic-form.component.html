@@ -1,0 +1,245 @@
+<div *ngIf="temp!== 'undefined' && this.dropdown && form" >
+<form [formGroup]="form" >
+  <div class="row" style="margin-bottom: 30px;margin-top:10px;">
+    <ng-container *ngFor="let item of temp?.templateData">
+      <div *ngIf="item.show" [className]="item.classes">
+        <div class="floating-label " *ngIf="item.controlType==='TextBox'" style="margin-top:15px;">
+          <input class="floating-input" type="text" placeholder=" " pattern="{{item?.validations?.regex}}" id="{{item.formControlName}}" [readonly]="item.readOnly"
+            formControlName="{{item.formControlName}}">
+          <span class="highlight"></span>
+          <label class="text astric-label-inline labels">{{item.label}}
+            <i *ngIf="item.validations?.required" class="fa fa-asterisk text-danger astric-red"></i>
+          </label>
+          <div class="text-danger" *ngIf="(form.get(item.formControlName)?.touched||
+      form.get(item.formControlName)?.dirty ) && !form.get(item.formControlName)?.valid">
+            <span *ngIf="form.get(item.formControlName).errors?.required">
+              {{item.errorMessages?.required}}</span>
+            <span *ngIf="form.get(item.formControlName).errors?.minlength">
+              {{item.errorMessages?.minLength}}</span>
+            <span *ngIf="form.get(item.formControlName).errors?.maxlength">
+              {{item.errorMessages?.maxLength}}</span>
+            <span *ngIf="form.get(item.formControlName)?.errors?.min">
+              {{item.errorMessages?.min}}</span>
+            <span *ngIf="form.get(item.formControlName)?.errors?.max">
+              {{item.errorMessages?.max}}</span>
+              <span *ngIf="form.get(item.formControlName).errors?.maxlength ||form.get(item.formControlName).errors?.minlength">
+                <Br>
+              </span>
+              <span *ngIf="form.get(item.formControlName)?.errors?.pattern">
+                {{item.errorMessages?.regex}}</span>
+          </div>
+        </div>
+        <div *ngIf="item.controlType==='MultiSelectDropDown' && dropdown[item?.formControlName]?.default ">
+          <label class="text astric-label-inline labels">{{item.label}}
+            <i *ngIf="item.validations?.required" class="fa fa-asterisk text-danger astric-red"></i>
+          </label>
+          <angular2-multiselect [data]="this.dropdown[item.formControlName].data" [(ngModel)]="this.dropdown[item.formControlName].default"
+            [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)"
+            (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)" formControlName="{{item.formControlName}}"
+            style="width:100%">
+            <c-item style="float:left">
+              <ng-template let-item="item">
+                <label style="color: #333;min-width: 150px;">{{item.itemName}}</label>
+              </ng-template>
+            </c-item>
+            <c-badge>
+              <ng-template let-item="item">
+                <label style=" font-size: 16px; margin: 0px;">{{item.itemName}}</label>
+              </ng-template>
+            </c-badge>
+          </angular2-multiselect>
+          <div class="text-danger" *ngIf="(form.get(item.formControlName)?.touched||
+        form.get(item.formControlName)?.dirty ) && !form.get(item.formControlName)?.valid">
+            <span *ngIf="form.get(item.formControlName).errors?.required">
+              {{item.errorMessages?.required}}</span>
+            <span *ngIf="form.get(item.formControlName).errors?.minlength">
+              {{item.errorMessages?.minLength}}</span>
+            <span *ngIf="form.get(item.formControlName).errors?.maxlength">
+              {{item.errorMessages?.maxLength}}</span>
+            <span *ngIf="form.get(item.formControlName)?.errors?.min">
+              {{item.errorMessages?.min}}</span>
+            <span *ngIf="form.get(item.formControlName)?.errors?.max">
+              {{item.errorMessages?.max}}</span>
+          </div>
+        </div>
+
+        <div class="floating-label" *ngIf="item.controlType==='Dropdown' && dropdown[item?.formControlName]?.default"
+          style="margin-top:15px;">
+          <select class="floating-select" value="" (change)="onChange($event)" onclick="this.setAttribute('value', this.value);"
+            id="{{item.formControlName}}" [disabled]="item.readOnly" formControlName="{{item.formControlName}}">
+            <option *ngFor="let item of dropdown[item.formControlName].data" value="{{item.id}}">{{item.name}}</option>
+          </select>
+          <span class="highlight"></span>
+          <label class="text astric-label-inline labels">{{item.label}}
+            <i *ngIf="item.validations?.required" class="fa fa-asterisk text-danger astric-red"></i>
+          </label>
+          <div class="text-danger" *ngIf="(form.get(item.formControlName)?.touched||
+        form.get(item.formControlName)?.dirty ) && !form.get(item.formControlName)?.valid">
+            <span *ngIf="form.get(item.formControlName).errors?.required">
+              {{item.errorMessages?.required}}</span>
+            <span *ngIf="form.get(item.formControlName).errors?.minlength">
+              {{item.errorMessages?.minLength}}</span>
+            <span *ngIf="form.get(item.formControlName).errors?.maxlength">
+              {{item.errorMessages?.maxLength}}</span>
+            <span *ngIf="form.get(item.formControlName)?.errors?.min">
+              {{item.errorMessages?.min}}</span>
+            <span *ngIf="form.get(item.formControlName)?.errors?.max">
+              {{item.errorMessages?.max}}</span>
+          </div>
+        </div>
+        <div *ngIf="dropdown[item.formControlName]">
+        <div class="floating-label" *ngIf="item.controlType==='Dropdown' && !(dropdown[item.formControlName]?.default)"
+          style="margin-top:15px;">
+          <select class="floating-select" value="" onclick="this.setAttribute('value', this.value);" id="{{item.formControlName}}"
+            [disabled]="item.readOnly" formControlName="{{item.formControlName}}">
+            <option *ngFor="let item of dropdown[item.formControlName]?.data" value="{{item.id}}">{{item.name}}</option>
+          </select>
+          <span class="highlight"></span>
+          <label class="text astric-label-inline labels">{{item.label}}
+            <i *ngIf="item.validations?.required" class="fa fa-asterisk text-danger astric-red"></i>
+          </label>
+          <div class="text-danger" *ngIf="(form.get(item.formControlName)?.touched||
+        form.get(item.formControlName)?.dirty ) && !form.get(item.formControlName)?.valid">
+            <span *ngIf="form.get(item.formControlName).errors?.required">
+              {{item.errorMessages?.required}}</span>
+            <span *ngIf="form.get(item.formControlName).errors?.minlength">
+              {{item.errorMessages?.minLength}}</span>
+            <span *ngIf="form.get(item.formControlName).errors?.maxlength">
+              {{item.errorMessages?.maxLength}}</span>
+            <span *ngIf="form.get(item.formControlName)?.errors?.min">
+              {{item.errorMessages?.min}}</span>
+            <span *ngIf="form.get(item.formControlName)?.errors?.max">
+              {{item.errorMessages?.max}}</span>
+          </div>
+        </div></div>
+        <div *ngIf="item.controlType==='DatePicker'" style="margin-top:15px;">
+          <div class="floating-label ">
+            <input type="text" placeholder=" " formControlName="{{item.formControlName}}" id="{{item.formControlName}}"
+              ngbDatepicker #i="ngbDatepicker" class="floating-input" [defaultValue]="item.default" [minDate]="item.validations.min"
+              [maxDate]="item.validations.max" [readonly]="item.readOnly">
+            <i (click)="i.toggle()" class="fa fa-calendar calender-icon"></i>
+            <span class="highlight"></span>
+            <label class="astric-label labels">{{item.label}}</label>
+          </div>
+          <div class="text-danger" *ngIf="(form.get(item.formControlName)?.touched||
+        form.get(item.formControlName)?.dirty ) && !form.get(item.formControlName)?.valid">
+            <span *ngIf="form.get(item.formControlName).errors?.required">
+              {{item.errorMessages?.required}}</span>
+            <span *ngIf="form.get(item.formControlName).errors?.minlength">
+              {{item.errorMessages?.minLength}}</span>
+            <span *ngIf="form.get(item.formControlName).errors?.maxlength">
+              {{item.errorMessages?.maxLength}}</span>
+            <span *ngIf="form.get(item.formControlName)?.errors?.min">
+              {{item.errorMessages?.min}}</span>
+            <span *ngIf="form.get(item.formControlName)?.errors?.max">
+              {{item.errorMessages?.max}}</span>
+          </div>
+        </div>
+        <div class="floating-label" *ngIf="item.controlType==='MonthPicker'" style="margin-top:15px;">
+          <fdms-month-picker (modelChange)="modelChange($event)" id="{{item.formControlName}}"></fdms-month-picker>
+          <div class="text-danger" *ngIf="(form.get(item.formControlName)?.touched||
+      form.get(item.formControlName)?.dirty )&& !form.get(item.formControlName)?.valid">
+            <span *ngIf="item?.formControlName?.errors?.required">
+              {{item.errorMessages?.required}}</span>
+            <span *ngIf="(item.formControlName)?.errors?.minlength">
+              {{item.errorMessages?.minLength}}</span>
+            <span *ngIf="(item.formControlName)?.errors?.maxlength">
+              {{item.errorMessages?.maxLength}}</span>
+            <span *ngIf="(item.formControlName)?.errors?.min">
+              {{item.errorMessages?.min}}</span>
+            <span *ngIf="(item.formControlName)?.errors?.max">
+              {{item.errorMessages?.max}}</span>
+          </div>
+        </div>
+        <div class="floating-label" *ngIf="item.controlType==='Calender'" style="margin-top:15px;">
+            <input type="text" placeholder="" id="{{item.formControlName}}"class="floating-input" placeholder=" " formControlName="{{item.formControlName}}"
+              ngbDatepicker #i="ngbDatepicker" class="floating-input" [defaultValue]="currentDate" readonly>
+            <i (click)="i.toggle()" class="fa fa-calendar calender-icon"></i>
+            <span class="highlight"></span>
+            <label class="text astric-label-inline labels">{{item.label}}
+              <i *ngIf="item.validations?.required" class="fa fa-asterisk text-danger astric-red"></i>
+            </label>
+          <div class="text-danger" *ngIf="(form.get(item.formControlName)?.touched||
+          form.get(item.formControlName)?.dirty ) && !form.get(item.formControlName)?.valid">
+              <span *ngIf="form.get(item.formControlName).errors?.required">
+                {{item.errorMessages?.required}}</span>
+              <span *ngIf="form.get(item.formControlName).errors?.minlength">
+                {{item.errorMessages?.minLength}}</span>
+              <span *ngIf="form.get(item.formControlName).errors?.maxlength">
+                {{item.errorMessages?.maxLength}}</span>
+              <span *ngIf="form.get(item.formControlName)?.errors?.min">
+                {{item.errorMessages?.min}}</span>
+              <span *ngIf="form.get(item.formControlName)?.errors?.max">
+                {{item.errorMessages?.max}}</span>
+            </div>
+        </div>
+        <div *ngIf="item.controlType==='FileUploader'">
+          <label class="labels astric-label-inline">{{item.label}} <i *ngIf="item.validations?.required" class="fa fa-asterisk text-danger astric-red"></i></label><br>
+          <label class="text"> {{(file.files[0]?.name)?(
+            ((file.files[0]?.name?.length<20)?(file.files[0]?.name):
+              (file.files[0]?.name.split('.')[0].slice(0,18)+'...'+(file.files[0]?.name.split('.')[file.files[0]?.name.split('.').length-1])))
+              ):'Select file'}}</label> <button type="button" (click)="file.click()" name="Upload" class="btn  btn-primary">Browse
+              <input type="file" formControlName="{{item.formControlName}}" id="{{item.formControlName}}" accept="{{item.accept}}"
+                #file (change)="handleFileInput($event)" class="upload-input" />
+              </button>
+              <br>
+              <div class="text-danger" *ngIf="(form.get(item.formControlName)?.touched|| form.get(item.formControlName)?.dirty) &&
+              !form.get(item.formControlName)?.valid">
+                <span *ngIf="form.get(item.formControlName).errors?.required">
+                  {{item.errorMessages?.required}}</span>
+              </div>
+              <span class="text-danger" *ngIf="uploadError[item.formControlName] && uploadError[item.formControlName]!==''">{{uploadError[item.formControlName]}}</span>
+        </div>
+        <div *ngIf="item.controlType==='toggleButton'">
+          <div class="btn-group" data-toggle="buttons">
+            <button class="btn btn-default" id="{{item1.id}}" [ngClass]="{'btn-primary': (form.get(item.formControlName)?.value===item1.id)}"
+              (click)="togleClick($event,item.formControlName)" *ngFor="let item1 of dropdown[item.formControlName]?.data">
+              {{item1.name}}
+            </button>
+          </div>
+        </div>
+        <div *ngIf="item.controlType==='DetailLabel'">
+          <div class="float-left">{{item.label}}</div>
+          <div>{{form.get(item.formControlName)?.value}}</div>
+        </div>
+        <div *ngIf="item.controlType==='ActionButton'">
+          <button class="btn btn-info pull-right" id="{{item.id}}" (click)="actionButtonClick($event)" [disabled]="isDisabled">{{item.label}}</button>
+        </div>
+        <div *ngIf="item.controlType==='CancelButton'">
+          <button class="btn pull-right" id="{{item.id}}" (click)="cancelButtonClick($event)">{{item.label}}</button>
+        </div>
+        <div class="text" *ngIf="item.controlType==='PrimaryButton'">
+          <button class="btn btn-primary" id="{{item.id}}" (click)="primaryButtonClick($event)"><i [className]="item.icon"></i>
+            &nbsp;&nbsp;{{item.label}}</button>
+        </div>
+        <div *ngIf="item.controlType==='Empty'"></div>
+        <!-- <div *ngIf="item.controlType==='progressbar'">
+      <ngb-progressbar type="success" [value]="uploadStatus" [striped]="true" [animated]="true">
+                          <i>{{uploadStatus}}</i>
+                        </ngb-progressbar></div> -->
+        <div *ngIf="item.controlType==='Label'">{{item.label}}</div>
+        <div *ngIf="item.controlType==='Br'">
+          <br>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</form>
+<!--modal-->
+<ng-template #content let-c="close" let-d="dismiss" >
+  <div class="modal-header">
+    <h4 class="modal-title"> <i class="fa fa-error"></i>{{headerText}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p id="exportDiv text">{{errorLog}}</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-info" (click)="downloadButtonClick()"><i class="fa fa-download"></i>Download</button>
+    <button class="btn" (click)="copy()"> <i class="fa fa-copy"></i>Copy</button>
+  </div>
+</ng-template>
+<!--modal-->
+</div>

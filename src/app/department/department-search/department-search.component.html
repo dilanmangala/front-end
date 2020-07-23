@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-md-12">
+    <form [formGroup]="departmentNameForm">
+      <div class="row" style="margin-bottom:30px">
+        <div class="col-4">
+          <label class="float-right">Department Name </label>
+        </div>
+        <div class="col-5">
+          <div class="input-group Rounded-Rectangle-3-copy">
+           <select type="text" *ngIf="isManageDepartment" name="departmentName" id="departmentName" formControlName="departmentName" class="form-control"
+              placeholder="" aria-describedby="basic-addon2">
+              <option value=""></option>
+              <option *ngFor="let item of dataForDropdown" id="{{item.name}}" value="{{item.name}}">
+                {{item.description}}
+              </option>
+            </select>
+            <input type="text" *ngIf="iscreateDepartment" name="departmentName" id="departmentName" formControlName="departmentName" class="form-control"
+              placeholder="" aria-describedby="basic-addon2" (keyup)="setDepName()">
+
+            <button *ngIf="isManageDepartment" class="input-group-addon btn-info Rounded-Rectangle-3-copy-2" id="basic-addon2" (click)="searchButtonClick()">Search </button>
+          </div>
+          <div class="text-danger" *ngIf="(departmentNameForm.controls.departmentName.touched||
+            departmentNameForm.controls.departmentName.dirty )&&
+             !departmentNameForm.controls.departmentName.valid">
+            <span *ngIf="this.departmentNameForm.controls.departmentName.errors.required">
+             This field is required.</span>
+            <span *ngIf="this.submitError && !this.departmentNameForm.controls.departmentName.errors?.required">
+             This field is required.</span>
+            <span *ngIf="this.departmentNameForm.controls.departmentName.errors?.maxlength">
+              Department name must not be more than 100 characters long.
+            </span>
+          </div>
+        </div>
+        <div class="col-3" class="float-left">
+          <button *ngIf="isManageDepartment" class="Rounded-Rectangle-3-copy-3 btn" (click)="resetButtonClick()">Reset
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,224 @@
+
+
+// date picker
+.custom-day {
+  text-align: center;
+  padding: 0.185rem 0.25rem;
+  display: inline-block;
+  height: 2rem;
+  width: 2rem;
+}
+.custom-day.focused {
+  background-color: #e6e6e6;
+}
+.custom-day.range, .custom-day:hover {
+  background-color: #0275d8;
+  color: white;
+}
+.faded {
+  opacity: 0.5;
+}
+/* .row{
+  margin-bottom: 30px !important;
+} */
+.Rounded-Rectangle-3-copy-4 {
+  width: 83px;
+  height: 38px;
+  mix-blend-mode: undefined;
+  border-radius: 4px;
+  background-color: #6772e5;
+  box-shadow: 0px 3px 6px 0 rgba(103, 114, 229, 0.25);
+}
+.Upload {
+  width: 58px;
+  height: 16px;
+  mix-blend-mode: undefined;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.4px;
+  text-align: left;
+  color: #ffffff;
+}
+
+.upload-input{
+  display:none;
+}
+.astric-red{
+  font-size: 0.5em;
+}
+.calender-button{
+  margin-top: 36px;
+}
+/* .success{
+color:green;
+}
+
+.errornous{
+  color: yellow;
+}
+.failed{
+  color:red;} */
+  .mobile-Number {
+    width: 129px;
+    height: 13px;
+    mix-blend-mode: undefined;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.4px;
+    text-align: left;
+    color: #949494;
+  }
+  .calender-icon{
+    position: absolute;
+    right: 0;
+    top: 13px;
+  }
+  a {
+    cursor: pointer;
+}
+  .astric-red{
+    font-size: 0.5em;
+  }
+
+  .astric-label {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: left;
+  }
+
+  /****  floating-Lable style start ****/
+  .floating-label {
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .floating-input, .floating-select {
+    padding: 4px 4px;
+    display: block;
+    outline: none;
+    border: none !important;
+    font-family: "Montserrat", sans-serif;
+    border-radius: 0px !important;
+    border-bottom: 1px solid #919191 !important;
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .floating-input:focus, .floating-select:focus {
+    outline: none !important;
+    border-bottom: 2px solid #20aee3;
+  }
+
+ .pagination {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: 0.25rem;
+}
+
+.pagination {
+    display: inline-block;
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+ul {
+    display: block;
+    list-style-type: disc;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+}
+.pagination>li {
+    display: inline;
+}
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}a:not([href]):not([tabindex]) {
+    color: inherit;
+    text-decoration: none;
+}
+.pagination>li>a, .pagination>li>span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+a {
+    cursor: pointer;
+}
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.text{
+  height: 15px;
+  font-family: Montserrat !important;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.4px;
+  text-align: left;
+  color: #1d1d1d;
+
+}
+.labels{
+  height: 11px;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.4px;
+  text-align: left;
+  color: #949494;
+}
+.my-drop-zone { border: dotted 3px lightgray; }
+.nv-file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
+.another-file-over-class { border: dotted 3px green; }
+.clear {
+  clear: both;
+}
+.btn{
+  font-family: Montserrat !important;
+}
+
+.modal-body {
+  max-height: calc(100vh - 210px);
+  overflow-y: auto;
+}
+.text{
+  font-family: Montserrat;
+  font-size: 16px; color: #949494;
+}
+.example-trigger {
+  display: inline-block;
+}
+.calender-icon{
+  position: absolute;
+  right: 0;
+  top: 17px;
+}

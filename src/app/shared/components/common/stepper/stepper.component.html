@@ -1,0 +1,36 @@
+    <div  class="row col-12 outer-div">
+      <div  *ngFor="let item of steps ;  last as islast;" class="for-div">
+        <button  [ngClass]="(item.isActive  && item.id!==0) ? 'active-a' : 'inactive-a'"
+                 class="text" style="border: none;"
+                 *ngIf="item.id!==0" id="{{item.id}}" (click)="anchorClick($event,content)"
+                 [disabled]="!item.isEnabled">{{item.id}}</button>
+          <!--<button *ngIf="!item.isActive && item.id!==0" id="{{item.id}}" (click)="anchorClick($event,content)" class="inactive-a text"  [disabled]="!item.isEnabled">{{item.id}}</button>-->
+        <p class="description text" id="{{item.id}}" >{{item.name}}</p>
+        <!--(click)="anchorClick($event,content)"-->
+        <div *ngIf="item.id===0" class="line-div"></div>
+      </div>
+    </div>
+    <ng-template #content let-c="close" let-d="dismiss">
+      <!-- <div class="modal-header">
+        <h4 class="modal-title">Modal title</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div> -->
+      <div class="modal-body">
+       Are you sure You want to Leave this page
+      </div>
+      <!-- <div class="m-t-20">{{closeResult}}</div> -->
+
+      <div class="modal-footer" style="border-top:0">
+        <button type="button" class="btn btn-info"(click)="d('stay')">Stay</button>
+         <button type="button" class="btn btn-secondary" (click)="d('leave') ">Leave</button>
+      </div>
+    </ng-template>
+
+    <!-- <button class="btn btn-lg btn-outline-primary" (click)="open2(content)">Launch demo modal</button> -->
+
+
+
+
+

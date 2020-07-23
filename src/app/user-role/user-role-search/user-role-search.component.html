@@ -1,0 +1,41 @@
+<form [formGroup]="userRoleSearchForm">
+  <div class="row">
+    <div class="col-4 floating-label">
+      <select id="department" class="floating-select" onclick="this.setAttribute('value', this.value);"
+              formControlName="department" [disabled]="!isButtonEnabled">
+        <option value=""></option>
+        <option *ngFor="let item of dataForDropdown" id="{{item.name}}" value="{{item.name}}">
+          {{item.description}}
+        </option>
+      </select >
+      <span class="highlight"></span>
+      <label class="astric-label">Department<i class="fa fa-asterisk text-danger astric-red"></i></label>
+      <div class="text-danger"
+           *ngIf="(userRoleSearchForm.controls?.department.touched||userRoleSearchForm.controls.department?.dirty )&& !userRoleSearchForm.controls.department?.valid">
+        <span *ngIf="this.userRoleSearchForm.controls.department?.errors.required"> This field is required.</span>
+      </div>
+    </div>
+    <div class="col-4 floating-label">
+      <select id="role" class="floating-select" onclick="this.setAttribute('value', this.value);"
+              formControlName="role" [disabled]="!isButtonEnabled" disabled="">
+        <option value=""></option>
+        <option *ngFor="let item of userRoleForDropdown" id="{{item.name}}" value="{{item.name}}">
+          {{item.description}}
+        </option>
+      </select>
+      <span class="highlight"></span>
+      <label class="astric-label">Role<i class="fa fa-asterisk text-danger astric-red"></i></label>
+      <div class="text-danger"
+           *ngIf="(userRoleSearchForm.controls.role?.touched||userRoleSearchForm.controls.role?.dirty )&& !userRoleSearchForm.controls.role?.valid">
+        <span *ngIf="this.userRoleSearchForm.controls.role?.errors.required"> Invalid Role</span>
+      </div>
+    </div>
+    <div class="col-2">
+      <button (click)="userRoleSearchButtonClick()" class="btn btn-info"
+              [disabled]="!isButtonEnabled">Search</button>
+    </div>
+    <div class="col-2">
+      <button class="btn" (click)="resetButtonClick()">Reset</button>
+    </div>
+  </div>
+</form>

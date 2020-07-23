@@ -1,0 +1,56 @@
+/*.piechart{*/
+  /*height: 330px;*/
+  /*width:280px;*/
+  /*margin: 0 auto;*/
+/*}*/
+/*>>> .ct-series-c .ct-slice-donut {*/
+/*stroke: #6772e5;*/
+/*}*/
+/*>>> .ct-series-b .ct-slice-donut {*/
+/*stroke: #20aee3;*/
+/*}*/
+/*>>> .ct-series-a .ct-slice-donut {*/
+/*stroke: #24d2b5;*/
+/*}*/
+/*.fa {*/
+  /*display: inline-block;*/
+  /*font: normal normal normal 14px/1 FontAwesome;*/
+  /*font-size: inherit;*/
+  /*text-rendering: auto;*/
+  /*-webkit-font-smoothing: antialiased;*/
+  /*-moz-osx-font-smoothing: grayscale;*/
+/*}*/
+/*.card .card-title {*/
+  /*position: relative;*/
+  /*font-weight: 500;*/
+/*}*/
+/*.font-12 {*/
+  /*font-size: 12px !important;*/
+  /*font-weight: 700px !important;*/
+/*}*/
+/**, ::after, ::before {*/
+  /*box-sizing: border-box;*/
+/*}*/
+/*:not(svg), :not(foreignObject) > svg {*/
+  /*transform-origin: 0px 0px 0px;*/
+/*}*/
+/*.c3 svg {*/
+  /*font: 10px sans-serif;*/
+  /*-webkit-tap-highlight-color: transparent;*/
+/*}*/
+/*.c3-chart-arc.c3-target.c3-focused g path {*/
+  /*opacity: 1;*/
+/*}*/
+/*.li-font{*/
+  /*font-weight:700;*/
+/*}*/
+/*.ct-label{*/
+
+/*}*/
+/*.ct-slice-donut{*/
+  /*font-weight: 600 !important;*/
+  /*font-size:16px !important;*/
+/*}*/
+/*.ct-series-a{*/
+  /*stroke:#BA68C8!important;*/
+/*}*/

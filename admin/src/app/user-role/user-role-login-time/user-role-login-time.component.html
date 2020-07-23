@@ -1,0 +1,37 @@
+<form [formGroup]="loginTimeForm">
+  <div class="row" *ngFor="let item of timeToFill">
+    <div class="col-2">
+      <input type="checkbox" formControlName="{{item.day}}">
+      <label>{{item.day}}</label>
+    </div>
+    <div class="col-2">
+      <label *ngIf="loginTimeForm.get(item.day).value">Start </label><br/>
+      <label *ngIf="loginTimeForm.get(item.day).value" >
+        {{
+          ((item.range[0]/60 >12)?
+          ((item.range[0]/60 -12)| number:'2.0-0'):
+          (item.range[0]/60 | number:'2.0-0'))
+          + ":"+
+           (item.range[0]%60 | number:'2.0-0')
+            +" " +
+            ((item.range[0]/60)>12 ? "PM": "AM" )
+          }}
+        </label>
+    </div>
+    <div class="col-6">
+      <nouislider [min]="0" [max]="1440" [step]="15" [(ngModel)]="item.range" formControlName="{{item.day1}}" *ngIf="loginTimeForm.get(item.day).value" style="zoom:0.6"></nouislider>
+    </div>
+    <div class="col-2">
+      <label *ngIf="loginTimeForm.get(item.day).value">End</label><br/>
+      <label *ngIf="loginTimeForm.get(item.day).value" >
+        {{
+           ((item.range[1]/60 >12)?
+            ((item.range[1]/60 -12)| number:'2.0-0')
+            :(item.range[1]/60 | number:'2.0-0'))
+            + ":"+( item.range[1]%60 | number:'2.0-0')
+            +" " +
+            ((item.range[1]/60)>12 ? "PM": "AM" )
+          }}</label>
+    </div>
+  </div>
+</form>

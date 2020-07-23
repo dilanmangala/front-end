@@ -1,0 +1,58 @@
+<div [formGroup]="addModfiedReasonForm" style="padding: 20px, padding-bottom: 40px">
+  <div class="select-editable floating-label" style="float: left;
+  min-width : 150px; padding-right: 0;padding-left: 0">
+    <select onchange="this.nextElementSibling.value=this.value" formControlName="reasonSelect"
+            onclick="this.setAttribute('value', this.value);" class="floating-select"
+            value="" style="width: 100%">
+      <option value=""></option>
+      <option *ngFor="let item of modificationForSelect" [ngValue]="item.id">
+        {{item.reasonCode}}
+      </option>
+    </select>
+    <input formControlName="reason" class="floating-input" type="text" name="format" [(ngModel)]="reason" style="width: 100%;
+    width: -webkit-calc(100% - 20px);
+    width: -moz-calc(100% - 20px);
+    width: calc(100% - 20px); border-bottom:40px"/>
+    <span class="highlight"></span>
+    <label> Modified Reason</label>
+    <br/> <br/>
+
+
+    <!--<div class="select-editable floating-label" style="float: left;">-->
+    <!--<select onchange="this.nextElementSibling.value=this.value" formControlName="reasonSelect" onclick="this.setAttribute('value', this.value);"-->
+    <!--class="floating-select">-->
+    <!--<option value=""></option>-->
+    <!--<option *ngFor="let item of modificationForSelect" [ngValue]="item.id">-->
+    <!--{{item.reasonCode}}-->
+    <!--</option>-->
+    <!--</select>-->
+    <!--<input formControlName="reason" type="text" name="format" class="floating-input custom-float-input"/>-->
+    <!--<span class="highlight"></span>-->
+    <!--<label class="astric-label"> Modified Reason-->
+    <!--<i class="fa fa-asterisk text-danger astric-red"></i>-->
+    <!--</label>-->
+    <!--<br/>-->
+    <!--<br/>-->
+
+
+    <div class="text-danger" *ngIf="((addModfiedReasonForm?.controls.reasonSelect?.touched ||
+  addModfiedReasonForm?.controls.reasonSelect?.dirty  )&&
+  (!addModfiedReasonForm?.controls.reasonSelect?.valid )) &&
+  (( addModfiedReasonForm?.controls.reason?.touched ||
+         addModfiedReasonForm?.controls.reason?.dirty  )&&
+        (!addModfiedReasonForm?.controls.reason?.valid))
+">
+            <span *ngIf="this.addModfiedReasonForm?.controls.reasonSelect?.errors?.required || showError">
+    Modified Reason Required</span>
+    </div>
+    <!--<div class="text-danger" *ngIf="(( addModfiedReasonForm?.controls.reason?.touched ||-->
+    <!--addModfiedReasonForm?.controls.reason?.dirty  )&&-->
+    <!--(!addModfiedReasonForm?.controls.reason?.valid))">-->
+    <!--<span *ngIf=" this.addModfiedReasonForm?.controls.reason?.errors?.required">-->
+    <!--Reason Required</span>-->
+    <!--</div>-->
+  </div>
+  <button style="margin-left: 10px" class="btn btn-primary" (click)="addReasonClick()"
+          [disabled]="!reason">Add Reason
+  </button>
+</div>

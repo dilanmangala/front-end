@@ -1,0 +1,13 @@
+<div class="card">
+  <div class="card-body">
+    <app-stepper *ngIf="isManageDepartment" [steps]="steps"
+                 (stepperClick)="onSelectStep($event)" [activeStep]="activeStep"></app-stepper>
+    <app-department-search (nextClick)="onClickNext($event)" (resetClick)="onClickReset($event)"
+                           (depName)="getDepName($event)" [stepId]="1" *ngIf="isManageDepartment"></app-department-search>
+
+    <app-department-detail
+      *ngIf="isCreateDepartment || (isManageDepartment && (activeStep == 2))" [incomingData]="data" [stepId]="2">
+
+    </app-department-detail>
+  </div>
+</div>

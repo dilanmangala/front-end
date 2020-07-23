@@ -1,0 +1,50 @@
+<ng-template #itemTemplate let-item="item" let-onCollapseExpand="onCollapseExpand"
+             let-onCheckedChange="onCheckedChange" style="height: 100% !important; padding-right: 20px"
+             xmlns="http://www.w3.org/1999/html">
+  <div class="form-inline row-item col-md-12">
+    <div class="form-check" style="justify-content: left; border: #7d8b92 1px">
+      <label class="form-check-label container" >
+        {{item.text}}
+      <input type="checkbox" class="form-check-input" [(ngModel)]="item.checked"
+             (ngModelChange)="onCheckedChange()" [disabled]="(this.isManage && !this.isUpdateClicked) || isAdminUser"
+             [indeterminate]="item.indeterminate"/>
+        <span class="checkmark"></span>
+      </label>
+      <i *ngIf="item.children" (click)="onCollapseExpand()" aria-hidden="true" class="fa fa-plus-circle float-right"
+         [class.fa-plus-circle]="item.collapsed" [class.fa-minus-circle]="!item.collapsed"
+         style="padding-right: 20px; top: -2px; font-size: 20px !important;"></i>
+    </div>
+    <!--<div class="custom-control custom-checkbox">-->
+      <!--<input type="checkbox" class="custom-control-input"[(ngModel)]="item.checked" (ngModelChange)="onCheckedChange()" [disabled]="(this.isManage && !this.isUpdateClicked) || isAdminUser"-->
+             <!--[indeterminate]="item.indeterminate">-->
+      <!--<label class="custom-control-label"   (click)="item.checked = !item.checked; onCheckedChange()">{{item.text}}-->
+      <!--</label>-->
+    <!--</div>-->
+  </div>
+</ng-template>
+
+<!--<form [formGroup]="checkBoxTableForm" *ngIf="data">-->
+  <!--<ngb-tabset>-->
+    <!--<ngb-tab title="{{item1.description}}" *ngFor="let item1 of data">-->
+    <!--<ngb-tab title="{{item1.text}}" *ngFor="let item1 of items">-->
+      <!--<ng-template ngbTabContent>-->
+        <div class="col-12" style="padding: 20px">
+          <div class="form-group">
+            <div class="d-inline-block">
+              <p class="astric-label">Permissions</p>
+              <ngx-treeview
+                [config]="config"
+                [items]="items"
+                [itemTemplate]="itemTemplate"
+                (selectedChange)="onSelectedChange($event)" style="border: #7d8b92 1px">
+              </ngx-treeview>
+              <!--<ngx-treeview [items]="items" [itemTemplate]="itemTemplate" (selectedChange)="onSelectedChange($event)">-->
+              <!--</ngx-treeview>-->
+            </div>
+          </div>
+        </div>
+        <div class="col-6"></div>
+      <!--</ng-template>-->
+    <!--</ngb-tab>-->
+  <!--</ngb-tabset>-->
+<!--</form>-->

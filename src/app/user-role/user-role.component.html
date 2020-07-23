@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="card-body">
+    <app-stepper *ngIf="isManageUserRole" [steps]="steps"
+                 (stepperClick)="onSelectStep($event)" [activeStep]="activeStep"></app-stepper>
+    <app-user-role-search *ngIf="isManageUserRole && !isSearchButtonClicked"
+                          (nextClick)="onClickNext($event)" (resetClick)="onClickReset($event)"
+                          (depName)="getRoleName($event)" [stepId]="1"></app-user-role-search>
+
+    <app-user-role-detail *ngIf="isCreateUserRole || (isManageUserRole && (activeStep == 2))" [incomingData]="data" [stepId]="2">
+    </app-user-role-detail>
+  </div>
+</div>

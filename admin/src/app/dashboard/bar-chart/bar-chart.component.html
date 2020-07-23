@@ -1,0 +1,10 @@
+<div *ngIf="barChartData?.length>0">
+    <h3 class="card-title align-self-center" >Task Based Summary</h3>
+
+<div *ngIf="barChartColors?.length>0">
+<canvas *ngIf="barChartData?.length>0" baseChart [datasets]="barChartData" [labels]="barChartLabels"
+   [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)"
+ [colors]="barChartColors" (chartClick)="chartClicked($event)">
+  </canvas>
+</div>
+</div>

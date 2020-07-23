@@ -1,0 +1,88 @@
+
+<app-dynamic-form></app-dynamic-form>
+
+<data-table [title]="''"  [items]="pagedItems" [indexColumn]="false" [expandableRows]="false" [pagination]="false"
+      (reload)="reload($event)" [primaryColumn]="'process_name'">
+            <data-table-column   width="11%" property="taskId" header="Task Id">
+      </data-table-column>
+      <data-table-column   width="27%" property="process_name" header="Description">
+      </data-table-column>
+      <data-table-column   width="23%" property="addedDate" header="Added Date">
+        <ng-template #dataTableCell let-item="item">
+          <span>{{(item.addedDate.split("T")[0]+" " + item.addedDate.split("T")[1].split(".")[0] )}}</span>
+        </ng-template>
+      </data-table-column>
+      <data-table-column   width="23%" property="completedDate" header="Completed Date">
+        <ng-template #dataTableCell let-item="item">
+          <span>{{(item.status==='COMPLETED'||item.status==='Completed') ?
+            (item.completedDate.split("T")[0]+" " + item.completedDate.split("T")[1].split(".")[0] ):'' }}</span>
+        </ng-template>
+      </data-table-column>
+      <data-table-column   width="15%" property="status" header="Status">
+        <ng-template #dataTableCell let-item="item">
+          <div [ngSwitch]="item.status">
+            <div *ngSwitchCase="'COMPLETED'">Completed</div>
+            <div *ngSwitchCase="'Completed'">Completed</div>
+            <!--failed-->
+            <div *ngSwitchCase="'FAILED'">Failed</div>
+            <div *ngSwitchCase="'Failed'">Failed</div>
+            <!--pending-->
+            <div *ngSwitchCase="'JM'">Pending</div>
+            <div *ngSwitchCase="'JP'">Pending</div>
+            <div *ngSwitchCase="'PENDING'">Pending</div>
+            <div *ngSwitchCase="'Pending'">Pending</div>
+            <!--pending-->
+            <div *ngSwitchCase="'PROCESSING'">Processing</div>
+            <div *ngSwitchCase="'Processing'">Processing</div>
+            <!-- <div *ngSwitchDefault=''>{{item.status}}</div> -->
+          </div>
+        </ng-template>
+      </data-table-column>
+      <data-table-column   width="15%" header="">
+        <ng-template #dataTableHeader let-item="item">
+
+        </ng-template>
+        <ng-template #dataTableCell let-item="item">
+          <button type="button" (click)="viewDetailClicked(item)" class="btn btn-sm btn-primary">View Detail</button>
+        </ng-template>
+      </data-table-column>
+      <data-table-column width="15%" >
+        <ng-template #dataTableHeader let-item="item">
+          <i></i>
+        </ng-template>
+        <ng-template #dataTableCell let-item="item">
+          <div *ngIf="item.status!=='PENDING' && item.status!=='JP' && item.status!=='JM'" >
+          <ngb-progressbar *ngIf="(((item.successCount)*100)/(item.recordCount))>0 && (((item.successCount)*100)/(item.recordCount))<100" type="primary" [striped]="true" [animated]="true"  [value]="(item.successCount*100/item.recordCount)">
+            <i> {{(((item.successCount)*100)/(item.recordCount)) |number: '2.0-0' }}</i>
+          </ngb-progressbar>
+          <ngb-progressbar *ngIf="(((item.successCount)*100)/(item.recordCount))===0"  [striped]="true" type="danger" [animated]="true"  [value]="100">
+            <i> {{(((item.successCount)*100)/(item.recordCount)) |number: '1.0-0' }}</i>
+          </ngb-progressbar>
+          <ngb-progressbar *ngIf="(((item.successCount)*100)/(item.recordCount))===100" type="success" [striped]="true" [animated]="true"  [value]="(item.successCount*100/item.recordCount)">
+            <i> {{(((item.successCount)*100)/(item.recordCount)) |number: '2.0-0' }}</i>
+          </ngb-progressbar>
+        </div>
+        </ng-template>
+      </data-table-column>
+    </data-table>
+    <!--pagination-->
+    <ul *ngIf="pager?.pages && pager.pages.length" class="pagination primary">
+      <li [ngClass]="{disabled:pager.currentPage === 1}">
+        <a (click)="setPage(1)">First</a>
+      </li>
+      <li [ngClass]="{disabled:pager.currentPage === 1}">
+        <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+      </li>
+      <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+        <a (click)="setPage(page)">{{page}}</a>
+      </li>
+      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+        <a (click)="setPage(pager.currentPage + 1)">Next</a>
+      </li>
+      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+        <a (click)="setPage(pager.totalPages)">Last</a>
+      </li>
+    </ul>
+    <div>
+    </div>
+

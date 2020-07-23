@@ -1,0 +1,57 @@
+<div class="login-register login-register-bg">
+  <div class="login-box card">
+    <div class="card-body">
+      <form [formGroup]="loginFormGroup">
+        <div class="logo-center" style="margin-bottom: 31px; ">
+          <img src="assets/images/logo.png">
+        </div>
+        <h3 class="box-title">Login</h3>
+        <p class="m-b-30">to continue to Dashboard</p>
+        <div class="form-group floating-label">
+          <input type="text" id="name" class="form-control floating-input" name="name" formControlName="name"
+                 [maxlength]="20" placeholder=" " (keyup)="changeError()">
+          <span class="highlight"></span>
+          <label class="form-control-placeholder" for="name">Name</label>
+          <div class="text-danger" *ngIf="(loginFormGroup.controls.name.touched||
+        loginFormGroup.controls.name.dirty)&&
+           !loginFormGroup.controls.name.valid">
+            <span *ngIf="this.loginFormGroup.controls.name.errors?.required">
+              Username is required</span>
+          </div>
+        </div>
+
+        <div class="form-group floating-label">
+          <span class="fa fa-eye eye-span" [ngClass]="{'fa-eye-slash': isShow}" (mousedown)="clickEvent()"
+                (mouseup)="relEvent()"></span>
+          <input type="password" id="password" class="form-control  floating-input" name="password"
+                 formControlName="password"
+                 [maxlength]="20" placeholder=" " (keyup)="changeError()">
+          <span class="highlight"></span>
+          <label>Password</label>
+          <div class="text-danger" *ngIf="(loginFormGroup.controls.password.touched ||
+          loginFormGroup.controls.password.dirty)&&
+           !loginFormGroup.controls.password.valid">
+            <span *ngIf="this.loginFormGroup.controls.password.errors?.required">
+              Password is required</span>
+          </div>
+        </div>
+        <!--<div *ngIf="(isLoginError && !isLoginServerError)-->
+        <!--&& !this.loginFormGroup.controls.password.errors?.required-->
+<!--&& !this.loginFormGroup.controls.name.errors?.required" class="text-danger">-->
+          <!--Invalid user name or password.-->
+        <!--</div>-->
+        <div *ngIf="isLoginError" class="text-danger">
+          Invalid user name or password.
+        </div>
+
+        <div class="form-group text-center m-t-20">
+          <div class="col-xs-12">
+            <button type="submit" class="btn btn-info btn-lg btn-block waves-effect waves-light"
+                    (click)="onLoggedinButtonClick()">Login
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

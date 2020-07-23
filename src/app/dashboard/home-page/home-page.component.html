@@ -1,0 +1,82 @@
+<div class="row">
+  <ng-container *ngFor="let item of homePageDynamicData index as i">
+  <ng-container >
+    <div class="col-3" >
+        <a href="{{'#/dashboard/'+ item.name}}">
+          <div class="card">
+            <span class="img-wrapper">
+                <!-- <img src = "'data:image/jpg;base64,'+({{item.image}})" class="img-responsive"/> -->
+                <img src='{{"data:image/jpeg;base64," + item.image}}' class="img-responsive"/>
+              <!-- <img src= class="img-responsive"> -->
+            </span>
+            <div  [classList]="item.style" >
+              <p class="widget-p" style="font-weight: 600;">{{item.description}}</p>
+            </div>
+        </div>
+        </a>
+      </div>
+     </ng-container>
+    </ng-container>
+</div>
+<div class="row"  *ngIf="roles?.indexOf('PERM_DTV_BILL_CHECK') >-1">
+  <div class="col-lg-8">
+      <div class="card" *ngIf="barChartData?.payload?.length>0">
+          <div class="card-body" style="height: 780px;">
+              <app-bar-chart *ngIf="barChartData" [barChartData]="barChartData"></app-bar-chart>
+      <br>
+    <div class="col-lg-12" style="margin-top:25px;" >
+      <div class="row" *ngIf="barChartData?.payload">
+          <div  class=" text col-lg-2">
+            <div style="font-weight: 800;font-size: 29px;margin-bottom:30px;">Total</div>
+            <div style="font-weight: 600;font-size: 14px;margin-bottom:30px;">Success</div>
+            <div  style="font-weight: 600;font-size: 14px;margin-bottom:30px;">Errornous</div>
+            <div style="font-weight: 600;font-size: 14px;margin-bottom:30px;">Failed</div>
+          </div>
+    <div  class=" text col-lg-2" *ngFor="let item of barChartData?.payload" >
+      <div style="font-weight: 800;font-size: 29px; margin-bottom:30px;">{{item.failed + item.success + item.errornous}}</div>
+      <div style="font-weight: 600;font-size: 14px;margin-bottom:30px;">{{item.success}}</div>
+      <div style="font-weight: 600;font-size: 14px;margin-bottom:30px;">{{item.errornous}}</div>
+      <div style="font-weight: 600;font-size: 14px;margin-bottom:30px;">{{item.failed}}</div>
+      <div style="font-weight: 600;font-size: 14px;margin-bottom:30px;"  placement="top" ngbTooltip="{{item.label}}">{{(item.label | slice:0:7)+(item.label?.length>7?"...":"")}}</div>
+    </div>
+    </div>
+    </div>
+</div>
+</div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card" *ngIf="barChartData?.payload?.length>0">
+      <div class="card-body">
+        <div *ngIf="barChartData?.payload?.length>0">
+                <h3 class="card-title align-self-center" >Error Rate</h3>
+                <div  >
+          <span  style="font-size: 39px; font-weight: 400;"  placement="top" ngbTooltip="{{barChartData?.payload[barChartData?.payload.length-1]?.label?barChartData?.payload[barChartData?.payload.length-1]?.label:null}}" >
+            {{((barChartData?.payload[barChartData?.payload.length-1]?.label?barChartData?.payload[barChartData?.payload.length-1]?.label:null )|slice:0:7)+(barChartData?.payload[barChartData?.payload.length-1]?.label?.length>7?"...":"")}}</span>
+          <span style="font-size:37px;font-weight: 700;">{{((barChartData?.payload[barChartData?.payload.length-1]?.failed+barChartData?.payload[barChartData?.payload.length-1]?.errornous+barChartData?.payload[barChartData?.payload.length-1]?.success)===0)?0:(barChartData?.payload[barChartData?.payload.length-1]?.failed*100)/(barChartData?.payload[barChartData?.payload.length-1]?.failed+barChartData?.payload[barChartData?.payload.length-1]?.errornous+barChartData?.payload[barChartData?.payload.length-1]?.success) |number: '2.0-0'}}</span>
+          <i *ngIf="(barChartData?.payload[barChartData?.payload.length-1]?.failed+barChartData?.payload[barChartData?.payload.length-1]?.errornous+barChartData?.payload[barChartData?.payload.length-1]?.success===0)?0:((barChartData?.payload[barChartData?.payload.length-1]?.failed*100)/(barChartData?.payload[barChartData?.payload.length-1]?.failed+barChartData?.payload[barChartData?.payload.length-1]?.errornous+barChartData?.payload[barChartData?.payload.length-1]?.success))
+          <((barChartData?.payload[barChartData?.payload.length-2]?.failed+barChartData?.payload[barChartData?.payload.length-2]?.errornous+barChartData?.payload[barChartData?.payload.length-2]?.success===0)?0:(barChartData?.payload[barChartData?.payload.length-2]?.failed*100)/(barChartData?.payload[barChartData?.payload.length-2]?.failed+barChartData?.payload[barChartData?.payload.length-2]?.errornous+barChartData?.payload[barChartData?.payload.length-2]?.success))"
+           class="fa fa-arrow-down" style=" line-height: 88px; font-size: 24px;     color: #24d2b5 "></i>
+           <i *ngIf="(barChartData?.payload[barChartData?.payload.length-1]?.failed+barChartData?.payload[barChartData?.payload.length-1]?.errornous+barChartData?.payload[barChartData?.payload.length-1]?.success===0)?0:((barChartData?.payload[barChartData?.payload.length-1]?.failed*100)/(barChartData?.payload[barChartData?.payload.length-1]?.failed+barChartData?.payload[barChartData?.payload.length-1]?.errornous+barChartData?.payload[barChartData?.payload.length-1]?.success))
+           > ((barChartData?.payload[barChartData?.payload.length-2]?.failed+barChartData?.payload[barChartData?.payload.length-2]?.errornous+barChartData?.payload[barChartData?.payload.length-2]?.success===0)?0:(barChartData?.payload[barChartData?.payload.length-2]?.failed*100)/(barChartData?.payload[barChartData?.payload.length-2]?.failed+barChartData?.payload[barChartData?.payload.length-2]?.errornous+barChartData?.payload[barChartData?.payload?.length-2]?.success))"
+       class="fa fa-arrow-up" style=" line-height: 88px; font-size: 24px;color: #ff5c6c"></i>
+        </div>
+        <div class="row" *ngIf="barChartData?.payload">
+          <!-- <app-bar-chart></app-bar-chart> -->
+          <span class="col-3"  *ngFor="let item of barChartData?.payload  let last = last;">
+            <label class="pre-cycle" *ngIf="!last">{{((item.failed + item.success + item.errornous)===0)?0:((item.failed*100)/(item.failed + item.success + item.errornous)) |number: '2.0-0'}}</label>
+            <br/>
+            <label  placement="top" ngbTooltip="{{item.label}}" *ngIf="!last" >{{((item.label)|slice:0:4)+(item.label?.length>4?"...":"")}}</label>
+          </span>
+</div>
+        </div>
+      </div>
+    </div>
+  <app-donut-chartV1 *ngIf="donutChartData"  [donutChartData]="donutChartData"></app-donut-chartV1>
+    <!-- <app-donut-chat [donutChartData]="donutChartData"></app-donut-chat> -->
+  </div>
+</div>
+
+
+
+
+

@@ -1,0 +1,27 @@
+table, th, td {
+    border: 1px solid #a8a8a8;
+    /* display: flex;
+    flex-direction: 'row';
+    justify-content: 'flex-start';
+    align-items: 'center';
+    width: 450px; */
+  }
+  table{
+      margin-top:15px; 
+  }
+  th{
+    background-color:#20aee3;
+    color:white;
+  }
+ input[type="checkbox"]{
+  width: 20px; /*Desired width*/
+  height: 20px; /*Desired height*/
+     line-height: 2.1ex;
+     /* margin: 5px; */
+}
+input[type=checkbox]:checked{
+  color:#20aee3;
+}
+.text{
+   /* margin-top: 5px; */
+}

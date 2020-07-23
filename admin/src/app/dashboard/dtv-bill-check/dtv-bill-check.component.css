@@ -1,0 +1,65 @@
+
+/* // date picker
+.custom-day {
+  text-align: center;
+  padding: 0.185rem 0.25rem;
+  display: inline-block;
+  height: 2rem;
+  width: 2rem;
+}
+.custom-day.focused {
+  background-color: #e6e6e6;
+}
+.custom-day.range, .custom-day:hover {
+  background-color: #0275d8;
+  color: white;
+} */
+.faded {
+  opacity: 0.5;
+}
+.row{
+  margin-bottom: 30px !important;
+}
+.Rounded-Rectangle-3-copy-4 {
+  width: 83px;
+  height: 38px;
+  mix-blend-mode: undefined;
+  border-radius: 4px;
+  background-color: #6772e5;
+  box-shadow: 0px 3px 6px 0 rgba(103, 114, 229, 0.25);
+}
+.Upload {
+  width: 58px;
+  height: 16px;
+  mix-blend-mode: undefined;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.4px;
+  text-align: left;
+  color: #ffffff;
+}
+
+.upload-input{
+  display:none;
+}
+.astric-red{
+  font-size: 0.5em;
+}
+.calender-button{
+  margin-top: 36px;
+}
+.btn {
+  font-family: Montserrat !important;  font-size: 16px;
+}
+.modal-body {
+  max-height: calc(100vh - 210px);
+  overflow-y: auto;
+}
+.text{
+  font-family: Montserrat;
+  font-size: 16px; color: #949494;
+}

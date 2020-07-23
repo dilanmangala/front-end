@@ -1,0 +1,126 @@
+{
+  "genderForSelect": [{
+      "id": "MALE",
+      "name": "Male"
+    },
+    {
+      "id": "FEMALE",
+      "name": "Female"
+    }
+  ],
+  "providerForSelect": [{
+      "id": "XL",
+      "name": "XL"
+    },
+    {
+      "id": "AXIS",
+      "name": "AXIS"
+    }
+  ],
+  "icTypeForSelect": [{
+      "id": "PASSPORT",
+      "name": "Passport"
+    },
+    {
+      "id": "KTP",
+      "name": "KTP"
+    },
+    {
+      "id": "SIM",
+      "name": "SIM"
+    }
+  ],
+  "politicallyExposedForSelect": [{
+      "id": "yes",
+      "name": "Yes"
+    },
+    {
+      "id": "no",
+      "name": "No"
+    }
+  ],
+  "hierarchyLevelForDropdown": [{
+      "name": "Aggregator",
+      "id": "Aggregator"
+    },
+    {
+      "name": "Merchant",
+      "id": "Merchant"
+    },
+    {
+      "name": "Agent",
+      "id": "Agent"
+    }
+  ],
+  "statusForDropdown": [{
+      "name": "Active",
+      "id": "ACTIVE"
+    },
+    {
+      "name": "InActive",
+      "id": "INACTIVE"
+    }
+  ],
+  "aliasTypeForDropdown": [{
+      "name": "Mobile",
+      "id": "MOBILE"
+    },
+    {
+      "name": "Non Mobile",
+      "id": "NONMOBILE"
+    }
+  ],
+  "hierarchyNameForDropdown": [{
+    "name": "Level 3 Hierarchy",
+    "id": "Level 3 Hierarchy"
+  }],
+  "walletLevelForDropdown": [{
+      "name": "Level 1",
+      "id": "Level1"
+    },
+    {
+      "name": "Level 2",
+      "id": "Level2"
+    }
+  ],
+  "statusForCreateControlWallet": [{
+      "name": "Active",
+      "id": "ACTIVE"
+    },
+    {
+      "name": "InActive",
+      "id": "INACTIVE"
+    }, {
+      "name": "Frozen",
+      "id": "FROZEN"
+    },
+    {
+      "name": "Archived",
+      "id": "ARCHIVED"
+    }, {
+      "name": "Suspended",
+      "id": "SUSPENDED"
+    },
+    {
+      "name": "Pin Blocked",
+      "id": "PIN_BLOCKED"
+    }
+  ],
+  "statusForUserRole" : [{
+      "name": "Active",
+      "id": "ACTIVE"
+    },
+    {
+      "name": "Blocked",
+      "id": "BLOCKED"
+    }
+  ],
+  "statusForAdminUser":[{
+    "id":"ENABLE",
+    "name":"Enable"
+    },
+    {
+    "id":"DISABLE",
+    "name":"Disable"
+    }]
+}

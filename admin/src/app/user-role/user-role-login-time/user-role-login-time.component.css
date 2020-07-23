@@ -1,0 +1,8 @@
+p {
+  font-family: Montserrat;
+}
+input[type="checkbox"][_ngcontent-c6] {
+  width: 20px;
+  height: 20px;
+  line-height: 2.1ex;
+}
